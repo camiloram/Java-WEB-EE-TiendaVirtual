@@ -9,9 +9,8 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -20,18 +19,19 @@ import javax.persistence.TemporalType;
  * @author Estudiante
  */
 @Entity
-public class Orden {
+public class Producto {
+    
     @Id
     private int id;
+    private String nombre;
+    private String descripcion;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha;
-    @OneToMany(mappedBy = "order")
-    private List<Producto> productos;
+    private Date fechaCreacion;
+    private long precio;
     @ManyToOne(optional=false)
-    private Comprador comprador;
-    @OneToOne(optional=false)
-    private InformacionFactura informacionFactura;
-    @OneToOne(optional=false)
-    private InformacionEnvio informacionEnvio;
-    
+    private Vendedor vendedor;
+    @ManyToMany
+    private List<Categoria> categorias;
+    @ManyToOne
+    private Orden orden;
 }

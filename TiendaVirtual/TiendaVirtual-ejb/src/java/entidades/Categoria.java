@@ -5,10 +5,20 @@
  */
 package entidades;
 
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
 /**
  *
  * @author Estudiante
  */
+@Entity
 public class Categoria {
-    
+    @Id
+    private int id;
+    private String descripcion;
+    @ManyToMany(mappedBy = "categorias") // como en la clase Producto
+    private List<Producto> productos;
 }

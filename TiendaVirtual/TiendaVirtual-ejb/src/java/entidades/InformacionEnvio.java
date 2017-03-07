@@ -5,10 +5,19 @@
  */
 package entidades;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Estudiante
  */
+@Entity
 public class InformacionEnvio {
-    
+    @Id
+    private int id;
+    private String pais;
+    private String departamento;
+    private String ciudad;
+    private String direccion;
 }

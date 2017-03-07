@@ -5,8 +5,11 @@
  */
 package entidades;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -16,5 +19,8 @@ import javax.persistence.Id;
 public class InformacionFactura {
     @Id
     private String id;
-    private String descripcion;
+    private String numeroTarjeta;
+    private String codigoTarjeta;
+    @Temporal(TemporalType.DATE)
+    private Date fechaExpiracion;
 }
