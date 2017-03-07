@@ -5,10 +5,20 @@
  */
 package entidades;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  *
  * @author Estudiante
  */
 public class Orden {
+    
+    private int id;
+    private Date fecha;
+    private List<Productos> productos;
+    private Comprador comprador;
+    private InformacionFactura informacionFactura;
+    private InformacionEnvio informacionEnvio;
     
 }
