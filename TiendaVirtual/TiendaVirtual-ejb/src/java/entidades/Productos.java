@@ -9,6 +9,6 @@ package entidades;
  *
  * @author Estudiante
  */
-public class Producto {
+public class Productos {
     
 }
