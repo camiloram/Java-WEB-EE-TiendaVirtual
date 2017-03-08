@@ -5,10 +5,18 @@
  */
 package entidades;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Estudiante
  */
+
+@Entity
 public class TipoIdentificacion {
     
+    @Id
+    private String id;
+    private String descripcion;
 }
