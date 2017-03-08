@@ -25,7 +25,7 @@ public class Orden {
     private int id;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "orden")
     private List<Producto> productos;
     @ManyToOne(optional=false)
     private Comprador comprador;
