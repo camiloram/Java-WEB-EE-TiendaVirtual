@@ -22,6 +22,22 @@ public class Comprador extends Persona{
     // en relaciones bidimeccionales, debemos definir el dueño de la relacion y esta va a ser el de lado muchos definido de la siguiente manera
     @OneToMany(mappedBy = "comprador") // siendo "comprador" de la Clase Orden
     private List<Orden> ordenes;
+
+    public List<Orden> getOrdenes() {
+        return ordenes;
+    }
+
+    public void setOrdenes(List<Orden> ordenes) {
+        this.ordenes = ordenes;
+    }
+
+    public int getCantidadCompras() {
+        return cantidadCompras;
+    }
+
+    public void setCantidadCompras(int cantidadCompras) {
+        this.cantidadCompras = cantidadCompras;
+    }
     @Column(name = "CANTIDAD_COMPRAS")
     private int cantidadCompras;
 }

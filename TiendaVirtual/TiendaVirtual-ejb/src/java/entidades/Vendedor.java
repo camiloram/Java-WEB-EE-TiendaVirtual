@@ -5,7 +5,9 @@
  */
 package entidades;
 
+import java.io.Serializable;
 import java.util.List;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -14,8 +16,25 @@ import javax.persistence.OneToMany;
  * @author Estudiante
  */
 @Entity
-public class Vendedor extends Persona{
+@DiscriminatorValue(value = "V")
+public class Vendedor extends Persona implements Serializable{
     @OneToMany(mappedBy = "vendedor")
     private List<Producto> productos;
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+
+    public int getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(int calificacion) {
+        this.calificacion = calificacion;
+    }
     private int calificacion;
 }

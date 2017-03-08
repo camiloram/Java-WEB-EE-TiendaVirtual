@@ -5,6 +5,7 @@
  */
 package entidades;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -27,10 +28,82 @@ import javax.persistence.TemporalType;
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @DiscriminatorColumn(name = "TIPO_PERSONA", discriminatorType = DiscriminatorType.STRING, length = 1)
-public class Persona {
+public class Persona implements Serializable {
     @Id
     @Column(length = 12)
     private String login;
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public TipoIdentificacion getTipoId() {
+        return tipoId;
+    }
+
+    public void setTipoId(TipoIdentificacion tipoId) {
+        this.tipoId = tipoId;
+    }
+
+    public String getNumeroIdentificacion() {
+        return numeroIdentificacion;
+    }
+
+    public void setNumeroIdentificacion(String numeroIdentificacion) {
+        this.numeroIdentificacion = numeroIdentificacion;
+    }
+
+    public String getNombre1() {
+        return nombre1;
+    }
+
+    public void setNombre1(String nombre1) {
+        this.nombre1 = nombre1;
+    }
+
+    public String getNombre2() {
+        return nombre2;
+    }
+
+    public void setNombre2(String nombre2) {
+        this.nombre2 = nombre2;
+    }
+
+    public String getApellido1() {
+        return apellido1;
+    }
+
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
+    }
+
+    public String getApellido2() {
+        return apellido2;
+    }
+
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     @ManyToOne(optional=false)
     @JoinColumn(name = "TIPO_ID")
     private TipoIdentificacion tipoId;
@@ -47,5 +120,7 @@ public class Persona {
     @Column(name = "FECHA_NACIMIENTO")
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento ;
+    @Column(nullable = false, length = 12)
+    private String password;
     
 }

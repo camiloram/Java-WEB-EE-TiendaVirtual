@@ -5,8 +5,8 @@
         <property name="serverName" value="localhost"/>
         <property name="portNumber" value="1527"/>
         <property name="databaseName" value="tiendaVirtualBD"/>
-        <property name="User" value="app"/>
-        <property name="Password" value="app"/>
+        <property name="User" value="admin1"/>
+        <property name="Password" value="admin"/>
         <property name="URL" value="jdbc:derby://localhost:1527/tiendaVirtualBD"/>
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
