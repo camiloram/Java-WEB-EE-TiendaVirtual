@@ -25,13 +25,20 @@ import javax.persistence.TemporalType;
 public class InformacionFactura implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private int id;
+    @Column(length = 12, nullable = false, name = "NUMERO_TARJETA")
+    private String numeroTarjeta;
+    @Column(length = 4, nullable = false, name = "CODIGO_TARJETA")
+    private String codigoTarjeta;
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false, name = "FECHA_EXPIRACION")
+    private Date fechaExpiracion;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -58,11 +65,4 @@ public class InformacionFactura implements Serializable {
     public void setFechaExpiracion(Date fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
     }
-    @Column(length = 12, nullable = false, name = "NUMERO_TARJETA")
-    private String numeroTarjeta;
-    @Column(length = 4, nullable = false, name = "CODIGO_TARJETA")
-    private String codigoTarjeta;
-    @Temporal(TemporalType.DATE)
-    @Column(nullable = false, name = "FECHA_EXPIRACION")
-    private Date fechaExpiracion;
 }
