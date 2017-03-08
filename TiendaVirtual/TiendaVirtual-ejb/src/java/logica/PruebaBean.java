@@ -23,5 +23,5 @@ public class PruebaBean {
     @PersistenceContext
     EntityManager em;
     
-    // pruebaaaaa
+    // pruebaaaaa kfjgkjhfgdkjfgasjkh
 }
