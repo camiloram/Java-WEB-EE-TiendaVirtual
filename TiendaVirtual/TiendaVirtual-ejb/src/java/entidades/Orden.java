@@ -31,6 +31,18 @@ public class Orden implements Serializable {
     //@GeneratedValue(strategy = GenerationType.TABLE) - crea tabla con el control de secuencia de cada tabla
     //@GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;
+    @OneToMany(mappedBy = "orden")
+    private List<Producto> productos;
+    @ManyToOne(optional=false)
+    private Comprador comprador;
+    @OneToOne(optional=false)
+    @JoinColumn(name = "ID_INF_FACTURA")
+    private InformacionFactura informacionFactura;
+    @OneToOne(optional=false)
+    @JoinColumn(name = "ID_INF_ENVIO")
+    private InformacionEnvio informacionEnvio;
 
     public int getId() {
         return id;
@@ -79,17 +91,5 @@ public class Orden implements Serializable {
     public void setInformacionEnvio(InformacionEnvio informacionEnvio) {
         this.informacionEnvio = informacionEnvio;
     }
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha;
-    @OneToMany(mappedBy = "orden")
-    private List<Producto> productos;
-    @ManyToOne(optional=false)
-    private Comprador comprador;
-    @OneToOne(optional=false)
-    @JoinColumn(name = "ID_INF_FACTURA")
-    private InformacionFactura informacionFactura;
-    @OneToOne(optional=false)
-    @JoinColumn(name = "ID_INF_ENVIO")
-    private InformacionEnvio informacionEnvio;
     
 }

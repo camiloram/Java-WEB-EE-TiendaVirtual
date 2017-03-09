@@ -29,6 +29,22 @@ public class Producto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(length = 30, nullable = false)
+    private String nombre;
+    @Column(length = 200)
+    private String descripcion;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "FECHA_CREACION")
+    private Date fechaCreacion;
+    private long precio;
+    @JoinColumn(name = "ID_VENDEDOR", nullable = false)
+    @ManyToOne(optional=false)
+    private Vendedor vendedor;
+    @ManyToMany
+    private List<Categoria> categorias;
+    @ManyToOne
+    @JoinColumn(name = "ID_ORDEN")
+    private Orden orden;
 
     public int getId() {
         return id;
@@ -93,20 +109,4 @@ public class Producto implements Serializable {
     public void setOrden(Orden orden) {
         this.orden = orden;
     }
-    @Column(length = 30, nullable = false)
-    private String nombre;
-    @Column(length = 200)
-    private String descripcion;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "FECHA_CREACION")
-    private Date fechaCreacion;
-    private long precio;
-    @JoinColumn(name = "ID_VENDEDOR", nullable = false)
-    @ManyToOne(optional=false)
-    private Vendedor vendedor;
-    @ManyToMany
-    private List<Categoria> categorias;
-    @ManyToOne
-    @JoinColumn(name = "ID_ORDEN")
-    private Orden orden;
 }

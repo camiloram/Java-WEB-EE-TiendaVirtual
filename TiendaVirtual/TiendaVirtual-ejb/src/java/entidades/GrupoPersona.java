@@ -23,6 +23,10 @@ import javax.persistence.Table;
 public class GrupoPersona implements Serializable {
     @EmbeddedId
     private GrupoPersonaPK id;
+    @ManyToOne
+    @MapsId("login")
+    @JoinColumn(referencedColumnName = "login", nullable = false, name = "LOGIN")
+    private Persona persona;
 
     public GrupoPersonaPK getId() {
         return id;
@@ -39,9 +43,4 @@ public class GrupoPersona implements Serializable {
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
-    
-    @ManyToOne
-    @MapsId("login")
-    @JoinColumn(referencedColumnName = "login", nullable = false, name = "LOGIN")
-    private Persona persona;
 }

@@ -23,6 +23,8 @@ public class TipoIdentificacion implements Serializable {
     @Id
     @Column(length = 2)
     private String id;
+    @Column(nullable = false, length = 30)
+    private String descripcion;
 
     public String getId() {
         return id;
@@ -39,6 +41,4 @@ public class TipoIdentificacion implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    @Column(nullable = false, length = 30)
-    private String descripcion;
 }

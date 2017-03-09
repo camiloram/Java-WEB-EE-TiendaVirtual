@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 public class Vendedor extends Persona implements Serializable{
     @OneToMany(mappedBy = "vendedor")
     private List<Producto> productos;
+    private int calificacion;
 
     public List<Producto> getProductos() {
         return productos;
@@ -36,5 +37,4 @@ public class Vendedor extends Persona implements Serializable{
     public void setCalificacion(int calificacion) {
         this.calificacion = calificacion;
     }
-    private int calificacion;
 }
