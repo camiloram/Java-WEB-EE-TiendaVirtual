@@ -23,6 +23,10 @@ public class Categoria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(length = 100)
+    private String descripcion;
+    @ManyToMany(mappedBy = "categorias") // como en la clase Producto
+    private List<Producto> productos;
 
     public int getId() {
         return id;
@@ -47,8 +51,4 @@ public class Categoria implements Serializable {
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
     }
-    @Column(length = 100)
-    private String descripcion;
-    @ManyToMany(mappedBy = "categorias") // como en la clase Producto
-    private List<Producto> productos;
 }
