@@ -5,10 +5,10 @@
         <property name="serverName" value="localhost"/>
         <property name="portNumber" value="1527"/>
         <property name="databaseName" value="tiendaVirtualBD"/>
-        <property name="User" value="app"/>
-        <property name="Password" value="app"/>
+        <property name="User" value="admin1"/>
+        <property name="Password" value="admin"/>
         <property name="URL" value="jdbc:derby://localhost:1527/tiendaVirtualBD"/>
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="jdbc/tiendaVirtualDB" object-type="user" pool-name="derby_net_tiendaVirtualBD_appPool"/>
+    <jdbc-resource enabled="true" jndi-name="jdbc/tiendaVirtualBD" object-type="user" pool-name="derby_net_tiendaVirtualBD_appPool"/>
 </resources>
