@@ -23,6 +23,14 @@ public class InformacionEnvio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(length = 50, nullable = false)
+    private String pais;
+    @Column(length = 50, nullable = false)
+    private String departamento;
+    @Column(length = 50, nullable = false)
+    private String ciudad;
+    @Column(length = 50, nullable = false)
+    private String direccion;
 
     public int getId() {
         return id;
@@ -63,12 +71,4 @@ public class InformacionEnvio implements Serializable {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    @Column(length = 50, nullable = false)
-    private String pais;
-    @Column(length = 50, nullable = false)
-    private String departamento;
-    @Column(length = 50, nullable = false)
-    private String ciudad;
-    @Column(length = 50, nullable = false)
-    private String direccion;
 }

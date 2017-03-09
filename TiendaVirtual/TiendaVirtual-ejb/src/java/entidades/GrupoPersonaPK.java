@@ -20,6 +20,8 @@ public class GrupoPersonaPK implements Serializable {  // para crear la llave co
     
     @Column(nullable = false, length = 12)
     private String login;
+    @Column(nullable = false, length = 12, name = "GRUPO_PERSONA")
+    private String grupoPersona;
 
     public String getGrupoPersona() {
         return grupoPersona;
@@ -27,8 +29,5 @@ public class GrupoPersonaPK implements Serializable {  // para crear la llave co
 
     public void setGrupoPersona(String grupoPersona) {
         this.grupoPersona = grupoPersona;
-    }
-    
-    @Column(nullable = false, length = 12, name = "GRUPO_PERSONA")
-    private String grupoPersona;
+    }    
 }

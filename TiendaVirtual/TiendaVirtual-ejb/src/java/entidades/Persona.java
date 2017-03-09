@@ -32,6 +32,24 @@ public class Persona implements Serializable {
     @Id
     @Column(length = 12)
     private String login;
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "TIPO_ID")
+    private TipoIdentificacion tipoId;
+    @Column(length = 15, nullable = false, name = "NUMERO_IDENTIFICACION")
+    private String numeroIdentificacion;
+    @Column(length = 40, nullable = false)
+    private String nombre1;
+    @Column(length = 40)
+    private String nombre2 ;
+    @Column(length = 40, nullable = false)
+    private String apellido1;
+    @Column(length = 40)
+    private String apellido2;
+    @Column(name = "FECHA_NACIMIENTO")
+    @Temporal(TemporalType.DATE)
+    private Date fechaNacimiento ;
+    @Column(nullable = false, length = 12)
+    private String password;
 
     public String getLogin() {
         return login;
@@ -104,23 +122,5 @@ public class Persona implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    @ManyToOne(optional=false)
-    @JoinColumn(name = "TIPO_ID")
-    private TipoIdentificacion tipoId;
-    @Column(length = 15, nullable = false, name = "NUMERO_IDENTIFICACION")
-    private String numeroIdentificacion;
-    @Column(length = 40, nullable = false)
-    private String nombre1;
-    @Column(length = 40)
-    private String nombre2 ;
-    @Column(length = 40, nullable = false)
-    private String apellido1;
-    @Column(length = 40)
-    private String apellido2;
-    @Column(name = "FECHA_NACIMIENTO")
-    @Temporal(TemporalType.DATE)
-    private Date fechaNacimiento ;
-    @Column(nullable = false, length = 12)
-    private String password;
     
 }

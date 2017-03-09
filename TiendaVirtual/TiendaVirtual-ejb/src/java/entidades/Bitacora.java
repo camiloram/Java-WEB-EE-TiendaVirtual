@@ -27,6 +27,13 @@ public class Bitacora implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "LOGIN")
+    private Persona persona;
+    @Column(nullable = false, length = 200)
+    private String descripcion;
 
     public int getId() {
         return id;
@@ -59,12 +66,5 @@ public class Bitacora implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "LOGIN")
-    private Persona persona;
-    @Column(nullable = false, length = 200)
-    private String descripcion;
     
 }
