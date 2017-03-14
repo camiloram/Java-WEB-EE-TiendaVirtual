@@ -5,6 +5,8 @@
  */
 package logica;
 
+import entidades.Bitacora;
+import entidades.Comprador;
 import entidades.InformacionEnvio;
 import entidades.InformacionFactura;
 import entidades.Orden;
@@ -17,8 +19,7 @@ import javax.ejb.Local;
  * @author Estudiante
  */
 @Local
-
-public interface AdministracionPersistenciaLocal {
+public interface AdministracionPersisitenciaJPALocal {
     
     public Producto consultarProducto(int idProducto);
     
@@ -29,4 +30,12 @@ public interface AdministracionPersistenciaLocal {
     public Integer crearInformacionFactura(InformacionFactura infFac);
     
     public void modificarProductos(List<Producto> productos, Orden orden);
+    
+    public Comprador cosultarComprador(String login);
+    
+    public List<Producto> consultarProductos();
+    
+    public Integer crearBitacora(Bitacora bitacora);
+    
+    public List<Comprador> consultarCompradores();
 }
