@@ -24,6 +24,9 @@ import javax.ejb.Stateful;
 @Stateful
 public class AdministracionOrden implements AdministracionOrdenLocal {
     
+    @EJB
+    AdministracionPersisitenciaJPALocal administracionPersisitencia;
+    
     private List<Producto> productos;
     private Comprador comprador;
     private InformacionFactura informacionFactura;
@@ -56,8 +59,12 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     @Override
     @Remove // se muere apenas termina la ejecución
     public Integer crearOrdenCompra() {
-        informacionEnvio.setId(administracionPersistencia.crearInformacionEnvio(informacionEnvio));
-        informacionFactura.setId(administracionPersistencia.crearInformacionFactura(informacionFactura));
+        
+        administracionPersistencia.crearInformacionEnvio(informacionEnvio);
+        administracionPersistencia.crearInformacionFactura(informacionFactura);
+        
+        //informacionEnvio.setId(administracionPersistencia.crearInformacionEnvio(informacionEnvio));
+        //informacionFactura.setId(administracionPersistencia.crearInformacionFactura(informacionFactura));
         
         Orden orden = new Orden();
         orden.setComprador(comprador);
@@ -65,8 +72,9 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
         orden.setInformacionEnvio(informacionEnvio);
         orden.setInformacionFactura(informacionFactura);
         
-        orden.setId(administracionPersistencia.crearOrden(orden));
-        
+        administracionPersisitencia.crearOrden(orden);
+        //orden.setId(administracionPersistencia.crearOrden(orden));
+
         administracionPersistencia.modificarProductos(productos, orden);
         return orden.getId();
 
@@ -84,7 +92,7 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
 
     @Override
     public Comprador getComprador() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return comprador;
     }
 
     @Override

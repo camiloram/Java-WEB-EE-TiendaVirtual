@@ -5,12 +5,20 @@
  */
 package cliente;
 
+import entidades.Comprador;
+import entidades.InformacionEnvio;
+import entidades.InformacionFactura;
+import entidades.Producto;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.AdministracionOrdenLocal;
+import logica.AdministracionPersisitenciaJPALocal;
 
 /**
  *
@@ -27,6 +35,10 @@ public class ClienteEJB extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @EJB
+    AdministracionPersisitenciaJPALocal administracionPersistencia;
+    @EJB
+    AdministracionOrdenLocal administracionOrden;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -41,6 +53,30 @@ public class ClienteEJB extends HttpServlet {
             out.println("<h1>Servlet ClienteEJB at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
+            
+            Producto producto = administracionPersistencia.consultarProducto(1);
+            administracionOrden.adicionarProducto(producto);
+            producto = new Producto();
+            producto = administracionPersistencia.consultarProducto(2);
+            administracionOrden.adicionarProducto(producto);
+
+            Comprador comprador = administracionPersistencia.consultarCompradores("maria");
+            administracionOrden.adicionarComprador(comprador);
+
+            InformacionEnvio informacionEnvio = new InformacionEnvio();
+            informacionEnvio.setCiudad("BOGOTA");
+            informacionEnvio.setDepartamento("CUNDINAMARCA");
+            informacionEnvio.setPais("COLOMBIA");
+            informacionEnvio.setDireccion("CR50 N30-22");
+            administracionOrden.adicionarInformacionEnvio(informacionEnvio);
+
+            InformacionFactura informacionFactura = new InformacionFactura();
+            informacionFactura.setCodigoTarjeta("0001");
+            informacionFactura.setFechaExpiracion(new Date());
+            informacionFactura.setNumeroTarjeta("123456789");
+            administracionOrden.adicionarInformacionFactura(informacionFactura);
+
+            administracionOrden.crearOrdenCompra();            
         }
     }
 

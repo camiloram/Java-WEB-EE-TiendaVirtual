@@ -38,4 +38,8 @@ public interface AdministracionPersisitenciaJPALocal {
     public Integer crearBitacora(Bitacora bitacora);
     
     public List<Comprador> consultarCompradores();
+
+    public Comprador consultarCompradores(String maria);
+
+    public Comprador consultarCompradores(String maria);
 }

@@ -15,6 +15,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -32,7 +33,8 @@ public class AdministracionPersisitenciaJPA implements AdministracionPersisitenc
     public Producto consultarProducto(int idProducto) {
         return em.find(Producto.class, idProducto); 
         // find es para consultas con llave primaria.
-        // carga las dependencias unicas o uno a uno que tenga relacionadas en este caso Ej: vendenor no la lista de categorias.
+        // carga las dependencias unicas o uno a uno que tenga relacionadas en 
+        // este caso Ej: vendenor no la lista de categorias.
         // definiendo en el @ManyToOne(fetch = FetchType.LAZY) para que no cargue y EAGER para que si.
         // @Basic(fetch = FetchType.LAZY) para datos(columnas) que no estan en relaciones.
     }
@@ -75,16 +77,21 @@ public class AdministracionPersisitenciaJPA implements AdministracionPersisitenc
 
     @Override
     public List<Producto> consultarProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query query = em.createNamedQuery("findAllProducts");
+        List<Producto> productos = query.getResultList();
+        return productos;
     }
 
     @Override
     public Integer crearBitacora(Bitacora bitacora) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.persist(bitacora);
+        return bitacora.getId();
     }
 
     @Override
     public List<Comprador> consultarCompradores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query query = em.createNamedQuery("findAllCompradores");
+        List<Comprador> compradores = query.getResultList();
+        return compradores;
     }
 }

@@ -8,6 +8,7 @@ package entidades;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,7 +41,7 @@ public class Orden implements Serializable {
     @OneToOne(optional=false)
     @JoinColumn(name = "ID_INF_FACTURA")
     private InformacionFactura informacionFactura;
-    @OneToOne(optional=false)
+    @OneToOne(optional=false) // cascade = CascadeType.PERSIST // operaciones en cascada persistencia
     @JoinColumn(name = "ID_INF_ENVIO")
     private InformacionEnvio informacionEnvio;
 

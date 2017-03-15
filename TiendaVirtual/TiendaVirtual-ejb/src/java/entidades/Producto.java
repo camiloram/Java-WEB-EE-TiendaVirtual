@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,6 +26,11 @@ import javax.persistence.TemporalType;
  * @author Estudiante
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "findAllProducts", query = "SELECT p FROM Producto p"),
+    @NamedQuery(name = "findProductById", query = "SELECT p FROM Producto p WHERE p.id = :idProducto")
+    // name = "findAllProducts" Debe ser unico en el proyecto
+})
 public class Producto implements Serializable {
     
     @Id
@@ -33,7 +40,7 @@ public class Producto implements Serializable {
     private String nombre;
     @Column(length = 200)
     private String descripcion;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "FECHA_CREACION")
     private Date fechaCreacion;
     private long precio;
