@@ -8,7 +8,6 @@ package entidades;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,6 +36,7 @@ public class Orden implements Serializable {
     @OneToMany(mappedBy = "orden")
     private List<Producto> productos;
     @ManyToOne(optional=false)
+    @JoinColumn(name = "ID_COMPRADOR")
     private Comprador comprador;
     @OneToOne(optional=false)
     @JoinColumn(name = "ID_INF_FACTURA")

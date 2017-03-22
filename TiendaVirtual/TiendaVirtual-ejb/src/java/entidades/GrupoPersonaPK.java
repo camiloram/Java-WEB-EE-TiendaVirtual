@@ -23,6 +23,14 @@ public class GrupoPersonaPK implements Serializable {  // para crear la llave co
     @Column(nullable = false, length = 12, name = "GRUPO_PERSONA")
     private String grupoPersona;
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     public String getGrupoPersona() {
         return grupoPersona;
     }

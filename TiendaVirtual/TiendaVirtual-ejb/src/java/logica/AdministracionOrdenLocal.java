@@ -9,9 +9,10 @@ import entidades.Comprador;
 import entidades.InformacionEnvio;
 import entidades.InformacionFactura;
 import entidades.Producto;
+import excepciones.CreacionOrdenException;
+import excepciones.ModificacionProductoException;
 import java.util.List;
 import javax.ejb.Local;
-import javax.ejb.Remove;
 
 /**
  *

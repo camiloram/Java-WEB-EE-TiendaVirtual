@@ -5,11 +5,14 @@
  */
 package entidades;
 
+import auditoria.MonitoreoProducto;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,10 +30,11 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "findAllProducts", query = "SELECT p FROM Producto p"),
-    @NamedQuery(name = "findProductById", query = "SELECT p FROM Producto p WHERE p.id = :idProducto")
-    // name = "findAllProducts" Debe ser unico en el proyecto
+@NamedQuery(name="findAllProducts",query="SELECT p FROM Producto p"),
+@NamedQuery(name="findProductById",query=
+        "SELECT p FROM Producto p WHERE p.id = :idProducto"),
 })
+@EntityListeners(MonitoreoProducto.class)
 public class Producto implements Serializable {
     
     @Id
@@ -44,8 +48,8 @@ public class Producto implements Serializable {
     @Column(name = "FECHA_CREACION")
     private Date fechaCreacion;
     private long precio;
-    @JoinColumn(name = "ID_VENDEDOR", nullable = false)
-    @ManyToOne(optional=false)
+    @ManyToOne(optional=false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_VENDEDOR",nullable = false)
     private Vendedor vendedor;
     @ManyToMany
     private List<Categoria> categorias;
