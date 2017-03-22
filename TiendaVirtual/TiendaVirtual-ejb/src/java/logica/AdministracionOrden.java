@@ -5,27 +5,35 @@
  */
 package logica;
 
+import auditoria.CreacionOrdenInterceptor;
 import entidades.Comprador;
 import entidades.InformacionEnvio;
 import entidades.InformacionFactura;
 import entidades.Orden;
 import entidades.Producto;
+import excepciones.CreacionOrdenException;
+import excepciones.ModificacionProductoException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+import javax.interceptor.Interceptors;
 
 /**
  *
  * @author Estudiante
  */
 @Stateful
+@TransactionManagement(TransactionManagementType.CONTAINER)
+//Para solo manejar transaccionalidad donde se defina
+@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class AdministracionOrden implements AdministracionOrdenLocal {
-    
-    @EJB
-    AdministracionPersisitenciaJPALocal administracionPersisitencia;
     
     private List<Producto> productos;
     private Comprador comprador;
@@ -34,7 +42,7 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     
     // Se Inyectaa la dependencia
     @EJB
-    AdministracionPersistenciaLocal administracionPersistencia;
+    AdministracionPersistenciaJPALocal administracionPersistencia;
 
     // Se crea en el momento que es llamado este constructor
     public AdministracionOrden() {
@@ -57,9 +65,12 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     }
 
     @Override
-    @Remove // se muere apenas termina la ejecución
-    public Integer crearOrdenCompra() {
-        
+    @Remove
+    @Interceptors(CreacionOrdenInterceptor.class)
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    public Integer crearOrdenCompra() throws CreacionOrdenException, ModificacionProductoException{
+        /*informacionEnvio.setId(administracionPersistencia.crearInformacionEnvio(informacionEnvio));
+        informacionFactura.setId(administracionPersistencia.crearInformacionFactura(informacionFactura));*/
         administracionPersistencia.crearInformacionEnvio(informacionEnvio);
         administracionPersistencia.crearInformacionFactura(informacionFactura);
         
@@ -72,9 +83,11 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
         orden.setInformacionEnvio(informacionEnvio);
         orden.setInformacionFactura(informacionFactura);
         
-        administracionPersisitencia.crearOrden(orden);
-        //orden.setId(administracionPersistencia.crearOrden(orden));
-
+        /*orden.setId(administracionPersistencia.crearOrden(orden));
+        
+        administracionPersistencia.modificarProductos(productos, orden);*/
+        
+        administracionPersistencia.crearOrden(orden);
         administracionPersistencia.modificarProductos(productos, orden);
         return orden.getId();
 

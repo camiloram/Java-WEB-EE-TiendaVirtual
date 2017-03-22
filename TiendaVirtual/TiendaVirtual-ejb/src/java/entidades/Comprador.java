@@ -6,7 +6,6 @@
 package entidades;
 
 import java.util.List;
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;

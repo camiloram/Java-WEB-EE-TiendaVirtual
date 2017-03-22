@@ -6,17 +6,24 @@
 package auditoria;
 
 import entidades.Producto;
+import javax.persistence.PostUpdate;
+import javax.persistence.PreUpdate;
 
 /**
  *
  * @author Estudiante
  */
 public class MonitoreoProducto {
-    public void preActualizacionProducto(Producto producto) {
-        System.out.println("El producto " + producto.getId() + " va a ser asignado a la orden de compra " + producto.getOrden().getId());
+    
+    @PreUpdate
+    public void preActualizacionProducto(Producto producto){
+        System.out.println("El producto " + producto.getId() + 
+            " va a ser agregado a la orden de compra " + producto.getOrden().getId());
     }
     
-    public void posActualizacionProducto(Producto producto) {
-        System.out.println("El producto " + producto.getId() + " fue asignado a la orden de compra " + producto.getOrden().getId());
+    @PostUpdate
+    public void postActualizacionProducto(Producto producto){
+        System.out.println("El producto " + producto.getId() + 
+            " fue asignado a la orden de compra " + producto.getOrden().getId());
     }
 }
