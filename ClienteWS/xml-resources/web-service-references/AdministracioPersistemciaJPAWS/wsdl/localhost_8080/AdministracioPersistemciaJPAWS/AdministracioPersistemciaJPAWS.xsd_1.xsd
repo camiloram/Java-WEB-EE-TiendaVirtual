@@ -1,0 +1,250 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://ws/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws/">
+
+<xs:element name="consultarCompradores" type="tns:consultarCompradores"/>
+
+<xs:element name="consultarCompradoresResponse" type="tns:consultarCompradoresResponse"/>
+
+<xs:element name="consultarCompradores_1" type="tns:consultarCompradores_1"/>
+
+<xs:element name="consultarCompradores_1Response" type="tns:consultarCompradores_1Response"/>
+
+<xs:element name="consultarProducto" type="tns:consultarProducto"/>
+
+<xs:element name="consultarProductoResponse" type="tns:consultarProductoResponse"/>
+
+<xs:element name="consultarProductos" type="tns:consultarProductos"/>
+
+<xs:element name="consultarProductosResponse" type="tns:consultarProductosResponse"/>
+
+<xs:element name="cosultarComprador" type="tns:cosultarComprador"/>
+
+<xs:element name="cosultarCompradorResponse" type="tns:cosultarCompradorResponse"/>
+
+<xs:element name="crearBitacora" type="tns:crearBitacora"/>
+
+<xs:element name="crearBitacoraResponse" type="tns:crearBitacoraResponse"/>
+
+<xs:element name="crearInformacionEnvio" type="tns:crearInformacionEnvio"/>
+
+<xs:element name="crearInformacionEnvioResponse" type="tns:crearInformacionEnvioResponse"/>
+
+<xs:element name="crearInformacionFactura" type="tns:crearInformacionFactura"/>
+
+<xs:element name="crearInformacionFacturaResponse" type="tns:crearInformacionFacturaResponse"/>
+
+<xs:element name="crearOrden" type="tns:crearOrden"/>
+
+<xs:element name="crearOrdenResponse" type="tns:crearOrdenResponse"/>
+
+<xs:element name="modificarProductos" type="tns:modificarProductos"/>
+
+<xs:complexType name="crearInformacionEnvio">
+<xs:sequence>
+<xs:element name="ie" type="tns:informacionEnvio" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="informacionEnvio">
+<xs:sequence>
+<xs:element name="ciudad" type="xs:string" minOccurs="0"/>
+<xs:element name="departamento" type="xs:string" minOccurs="0"/>
+<xs:element name="direccion" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="pais" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="crearInformacionEnvioResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="crearOrden">
+<xs:sequence>
+<xs:element name="orden" type="tns:orden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="orden">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="fecha" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="comprador" type="tns:comprador" minOccurs="0"/>
+<xs:element name="informacionFactura" type="tns:informacionFactura" minOccurs="0"/>
+<xs:element name="informacionEnvio" type="tns:informacionEnvio" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="comprador">
+<xs:complexContent>
+<xs:extension base="tns:persona">
+<xs:sequence>
+<xs:element name="cantidadCompras" type="xs:int"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="persona">
+<xs:sequence>
+<xs:element name="apellido1" type="xs:string" minOccurs="0"/>
+<xs:element name="apellido2" type="xs:string" minOccurs="0"/>
+<xs:element name="fechaNacimiento" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="login" type="xs:string" minOccurs="0"/>
+<xs:element name="nombre1" type="xs:string" minOccurs="0"/>
+<xs:element name="nombre2" type="xs:string" minOccurs="0"/>
+<xs:element name="numeroIdentificacion" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="tipoId" type="tns:tipoIdentificacion" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tipoIdentificacion">
+<xs:sequence>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="informacionFactura">
+<xs:sequence>
+<xs:element name="codigoTarjeta" type="xs:string" minOccurs="0"/>
+<xs:element name="fechaExpiracion" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="numeroTarjeta" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="crearOrdenResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarProductos">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="consultarProductosResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:producto" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="producto">
+<xs:sequence>
+<xs:element name="categorias" type="tns:categoria" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"/>
+<xs:element name="fechaCreacion" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="orden" type="tns:orden" minOccurs="0"/>
+<xs:element name="precio" type="xs:long"/>
+<xs:element name="vendedor" type="tns:vendedor" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="categoria">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="vendedor">
+<xs:complexContent>
+<xs:extension base="tns:persona">
+<xs:sequence>
+<xs:element name="calificacion" type="xs:int"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="crearInformacionFactura">
+<xs:sequence>
+<xs:element name="infFac" type="tns:informacionFactura" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="crearInformacionFacturaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarProducto">
+<xs:sequence>
+<xs:element name="idProducto" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarProductoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:producto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="modificarProductos">
+<xs:sequence>
+<xs:element name="productos" type="tns:producto" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="orden" type="tns:orden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarCompradores">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="consultarCompradoresResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:comprador" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarCompradores_1">
+<xs:sequence>
+<xs:element name="maria" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarCompradores_1Response">
+<xs:sequence>
+<xs:element name="return" type="tns:comprador" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cosultarComprador">
+<xs:sequence>
+<xs:element name="login" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cosultarCompradorResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:comprador" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="crearBitacora">
+<xs:sequence>
+<xs:element name="bitacora" type="tns:bitacora" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="bitacora">
+<xs:sequence>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"/>
+<xs:element name="fecha" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="persona" type="tns:persona" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="crearBitacoraResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
