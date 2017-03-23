@@ -8,7 +8,6 @@ package entidades;
 import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -18,14 +17,15 @@ import javax.persistence.Table;
  *
  * @author Estudiante
  */
-
-@Entity(name = "GRUPO_PERSONA")
+@Entity
+@Table(name = "GRUPO_PERSONA")
 public class GrupoPersona implements Serializable {
     @EmbeddedId
     private GrupoPersonaPK id;
     @ManyToOne
     @MapsId("login")
-    @JoinColumn(referencedColumnName = "login", nullable = false, name = "LOGIN")
+    @JoinColumn(referencedColumnName = "login", nullable = false,
+            name = "LOGIN")
     private Persona persona;
 
     public GrupoPersonaPK getId() {

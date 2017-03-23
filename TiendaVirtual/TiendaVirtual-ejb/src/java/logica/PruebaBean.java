@@ -22,6 +22,4 @@ public class PruebaBean {
     // "Insert Code > Add Business Method")
     @PersistenceContext
     EntityManager em;
-    
-    // pruebaaaaa kfjgkjhfgdkjfgasjkh
 }

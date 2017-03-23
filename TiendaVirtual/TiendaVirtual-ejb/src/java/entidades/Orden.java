@@ -19,12 +19,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Estudiante
  */
 @Entity
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Orden implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,9 +38,11 @@ public class Orden implements Serializable {
     private int id;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
+    @XmlTransient
     @OneToMany(mappedBy = "orden")
     private List<Producto> productos;
     @ManyToOne(optional=false)
+    @JoinColumn(name = "ID_COMPRADOR")
     private Comprador comprador;
     @OneToOne(optional=false)
     @JoinColumn(name = "ID_INF_FACTURA")

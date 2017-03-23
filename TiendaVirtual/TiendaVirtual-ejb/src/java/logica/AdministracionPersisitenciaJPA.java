@@ -94,4 +94,9 @@ public class AdministracionPersisitenciaJPA implements AdministracionPersisitenc
         List<Comprador> compradores = query.getResultList();
         return compradores;
     }
+
+    @Override
+    public Comprador consultarCompradores(String maria) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

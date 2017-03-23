@@ -13,18 +13,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Estudiante
  */
 @Entity
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Categoria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(length = 100)
     private String descripcion;
+    @XmlTransient
     @ManyToMany(mappedBy = "categorias") // como en la clase Producto
     private List<Producto> productos;
 

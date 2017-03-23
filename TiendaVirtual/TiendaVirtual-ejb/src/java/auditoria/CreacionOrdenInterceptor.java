@@ -6,6 +6,7 @@
 package auditoria;
 
 import entidades.Bitacora;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
@@ -19,15 +20,21 @@ import logica.AdministracionPersisitenciaJPALocal;
 public class CreacionOrdenInterceptor {
     
     @EJB
-    AdministracionPersisitenciaJPALocal administracionPersisitencia;
+    AdministracionPersisitenciaJPALocal administracionPersistencia;
     
     @AroundInvoke
-    public Object creacionOrden(InvocationContext ic) throws Exception {
+    public Object creacionOrden(InvocationContext ic) throws Exception{
         Object object = ic.getTarget();
         
-        AdministracionOrdenLocal administracionOrdenLocal = (AdministracionOrdenLocal) object;
+        AdministracionOrdenLocal administracionOrden = (AdministracionOrdenLocal) object;
         
         Bitacora bitacora = new Bitacora();
+        bitacora.setPersona(administracionOrden.getComprador());
+        bitacora.setFecha(new Date());
+        bitacora.setDescripcion("Creación de nueva orden");
         
+        administracionPersistencia.crearBitacora(bitacora);
+        
+        return ic.proceed();
     }
 }

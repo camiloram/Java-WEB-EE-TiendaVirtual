@@ -9,9 +9,10 @@ import entidades.Comprador;
 import entidades.InformacionEnvio;
 import entidades.InformacionFactura;
 import entidades.Producto;
+import excepciones.CreacionOrdenException;
+import excepciones.ModificacionProductoException;
 import java.util.List;
 import javax.ejb.Local;
-import javax.ejb.Remove;
 
 /**
  *
@@ -23,10 +24,12 @@ public interface AdministracionOrdenLocal {
     public void adicionarComprador(Comprador comprador);
     public void adicionarInformacionFactura(InformacionFactura informacionFactura);
     public void adicionarInformacionEnvio(InformacionEnvio informacionEnvio);
-    public Integer crearOrdenCompra();
+    
+    public Integer crearOrdenCompra() throws CreacionOrdenException, ModificacionProductoException;
+    
     public void cancelarOrdenCompra();
     public void adicionarProducto(Producto producto);
     public Comprador getComprador();
-    public List ConsultarCarroCompras();
     
+    public List consultarCarroCompras();
 }
