@@ -107,7 +107,7 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
 
     @Override
     public List consultarCarroCompras() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return productos;
     }
     
 }
