@@ -9,9 +9,13 @@ import entidades.Comprador;
 import entidades.InformacionEnvio;
 import entidades.InformacionFactura;
 import entidades.Producto;
+import excepciones.CreacionOrdenException;
+import excepciones.ModificacionProductoException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.AdministracionOrdenLocal;
 import logica.AdministracionPersisitenciaJPALocal;
+import logica.AdministracionPersistenciaLocal;
 
 /**
  *
@@ -36,7 +41,7 @@ public class ClienteEJB extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @EJB
-    AdministracionPersisitenciaJPALocal administracionPersistencia;
+    AdministracionPersistenciaLocal administracionPersistencia;
     @EJB
     AdministracionOrdenLocal administracionOrden;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -54,13 +59,14 @@ public class ClienteEJB extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
             
-            Producto producto = administracionPersistencia.consultarProducto(1);
+            /*Producto producto = administracionPersistencia.consultarProducto(1);
             administracionOrden.adicionarProducto(producto);
             producto = new Producto();
             producto = administracionPersistencia.consultarProducto(2);
             administracionOrden.adicionarProducto(producto);
 
-            Comprador comprador = administracionPersistencia.consultarCompradores("maria");
+            Comprador comprador = new Comprador();
+            comprador.setLogin("maria");
             administracionOrden.adicionarComprador(comprador);
 
             InformacionEnvio informacionEnvio = new InformacionEnvio();
@@ -76,7 +82,37 @@ public class ClienteEJB extends HttpServlet {
             informacionFactura.setNumeroTarjeta("123456789");
             administracionOrden.adicionarInformacionFactura(informacionFactura);
 
-            administracionOrden.crearOrdenCompra();            
+            administracionOrden.crearOrdenCompra();*/
+            
+            Producto producto = administracionPersistencia.consultarProducto(1);
+            administracionOrden.adicionarProducto(producto);
+            producto = new Producto();
+            producto = administracionPersistencia.consultarProducto(2);
+            administracionOrden.adicionarProducto(producto);
+
+            Comprador comprador = administracionPersistencia.consultarComprador("maria");
+            administracionOrden.adicionarComprador(comprador);
+
+            InformacionEnvio informacionEnvio = new InformacionEnvio();
+            informacionEnvio.setCiudad("BOGOTA");
+            informacionEnvio.setDepartamento("CUNDINAMARCA");
+            informacionEnvio.setPais("COLOMBIA");
+            informacionEnvio.setDireccion("CR50 N30-22");
+            administracionOrden.adicionarInformacionEnvio(informacionEnvio);
+
+            InformacionFactura informacionFactura = new InformacionFactura();
+            informacionFactura.setCodigoTarjeta("0001");
+            informacionFactura.setFechaExpiracion(new Date());
+            informacionFactura.setNumeroTarjeta("123456789");
+            administracionOrden.adicionarInformacionFactura(informacionFactura);
+
+            try {
+                administracionOrden.crearOrdenCompra();
+            } catch (CreacionOrdenException ex) {
+                System.out.println("Ocurrió un error al crear la orden de compra.");
+            } catch (ModificacionProductoException ex) {
+                System.out.println("Ocurrió un error al modificar los productos de la orden de compra.");
+            }
         }
     }
 

@@ -20,9 +20,9 @@ import javax.jms.ObjectMessage;
  * @author Estudiante
  */
 @MessageDriven(activationConfig = {
-    @ActivationConfigProperty(propertyName = "clientId", propertyValue = "jms/creacionOrdenTopic"),
-    @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/creacionOrdenTopic"),
-    @ActivationConfigProperty(propertyName = "subscriptionName", propertyValue = "jms/creacionOrdenTopic"),
+    @ActivationConfigProperty(propertyName = "clientId", propertyValue = "jms/CreacionOrdenTopic"),
+    @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/CreacionOrdenTopic"),
+    @ActivationConfigProperty(propertyName = "subscriptionName", propertyValue = "jms/CreacionOrdenTopic"),
     @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic")
 })
 public class EmpresaFabricanteMessage implements MessageListener {
@@ -36,16 +36,17 @@ public class EmpresaFabricanteMessage implements MessageListener {
             ObjectMessage objectMessage = (ObjectMessage) message;
             Orden orden = (Orden) objectMessage.getObject();
             List<Producto> productos = orden.getProductos();
-            System.out.println("Empresa de fábrica: se ha recibido la notificacion de " +
-                    "venta de los productos: ");
+            String nombreProductos = "";
             Boolean bandera = false;
             for (Producto producto : productos) {
                 if (!bandera)
-                    System.out.print(producto.getDescripcion());
+                    nombreProductos = nombreProductos + producto.getDescripcion();
                 else
-                    System.out.print(", " + producto.getDescripcion());
+                    nombreProductos = nombreProductos + ", " + producto.getDescripcion();
                 bandera = true;
             }
+            System.out.println("Empresa de fábrica: se ha recibido la notificacion de " +
+                    "venta de los productos: " + nombreProductos);
         }catch(JMSException ex){
             System.out.println("Error EmpresaEnvioMessage: " + ex);
         }

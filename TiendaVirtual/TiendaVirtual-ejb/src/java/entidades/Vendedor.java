@@ -9,6 +9,9 @@ import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -16,7 +19,9 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @DiscriminatorValue(value = "V")
-public class Vendedor extends Persona implements Serializable{
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Vendedor extends Persona {
+    @XmlTransient
     @OneToMany(mappedBy = "vendedor")
     private List<Producto> productos;
     private int calificacion;

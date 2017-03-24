@@ -18,9 +18,9 @@ import javax.jms.ObjectMessage;
  * @author Estudiante
  */
 @MessageDriven(activationConfig = {
-    @ActivationConfigProperty(propertyName = "clientId", propertyValue = "jms/creacionOrdenTopic"),
-    @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/creacionOrdenTopic"),
-    @ActivationConfigProperty(propertyName = "subscriptionName", propertyValue = "jms/creacionOrdenTopic"),
+    @ActivationConfigProperty(propertyName = "clientId", propertyValue = "jms/CreacionOrdenTopic"),
+    @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/CreacionOrdenTopic"),
+    @ActivationConfigProperty(propertyName = "subscriptionName", propertyValue = "jms/CreacionOrdenTopic"),
     @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic")
     //@ActivationConfigProperty(propertyName="messageSelector", propertyValue = "Fragile is TRUE")
 })

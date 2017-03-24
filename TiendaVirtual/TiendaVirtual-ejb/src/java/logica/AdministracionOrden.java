@@ -42,7 +42,7 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     
     // Se Inyectaa la dependencia
     @EJB
-    AdministracionPersistenciaJPALocal administracionPersistencia;
+    AdministracionPersisitenciaJPALocal administracionPersistencia;
 
     // Se crea en el momento que es llamado este constructor
     public AdministracionOrden() {
@@ -74,17 +74,13 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
         administracionPersistencia.crearInformacionEnvio(informacionEnvio);
         administracionPersistencia.crearInformacionFactura(informacionFactura);
         
-        //informacionEnvio.setId(administracionPersistencia.crearInformacionEnvio(informacionEnvio));
-        //informacionFactura.setId(administracionPersistencia.crearInformacionFactura(informacionFactura));
-        
         Orden orden = new Orden();
         orden.setComprador(comprador);
         orden.setFecha(new Date());
         orden.setInformacionEnvio(informacionEnvio);
         orden.setInformacionFactura(informacionFactura);
-        
+        orden.setProductos(productos);
         /*orden.setId(administracionPersistencia.crearOrden(orden));
-        
         administracionPersistencia.modificarProductos(productos, orden);*/
         
         administracionPersistencia.crearOrden(orden);
@@ -96,6 +92,7 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     @Override
     @Remove // se muere apenas termina la ejecución
     public void cancelarOrdenCompra() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -109,7 +106,7 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     }
 
     @Override
-    public List ConsultarCarroCompras() {
+    public List consultarCarroCompras() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

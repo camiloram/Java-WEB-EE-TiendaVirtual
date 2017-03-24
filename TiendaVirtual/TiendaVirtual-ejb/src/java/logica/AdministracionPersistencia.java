@@ -5,6 +5,8 @@
  */
 package logica;
 
+import entidades.Bitacora;
+import entidades.Comprador;
 import entidades.InformacionEnvio;
 import entidades.InformacionFactura;
 import entidades.Orden;
@@ -22,34 +24,14 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Andres
+ * @author Estudiante
  */
 @Stateless
 public class AdministracionPersistencia implements AdministracionPersistenciaLocal {
-
+    
     private Connection connection;
     @Resource(lookup = "jdbc/tiendaVirtualDB")
     DataSource ds;
-
-    @PostConstruct
-    private void inicializar() {
-        try {
-            connection = ds.getConnection();
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
-    }
-
-    @PreDestroy
-    private void limpiar() {
-        try {
-            connection.close();
-            connection = null;
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
-    }
-
     
     @Override
     public Producto consultarProducto(int idProducto) {
@@ -159,4 +141,47 @@ public class AdministracionPersistencia implements AdministracionPersistenciaLoc
             System.out.println("Error modificarProductos " + ex.toString());
         }
     }
+
+    // Add business logic below. (Right-click in editor and choose
+    // "Insert Code > Add Business Method")
+    
+    @PostConstruct
+    private void inicializar(){
+        try{
+            connection = ds.getConnection();
+        } catch (SQLException ex){
+            System.out.println(ex.toString());
+        }
+    }
+    
+    @PreDestroy
+    private void limpiar(){
+        try{
+            connection.close();
+        } catch (SQLException ex){
+            System.out.println(ex.toString());
+        }
+    }
+
+    @Override
+    public Comprador consultarComprador(String login) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Producto> consultarProductos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Integer crearBitacora(Bitacora bitacora) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Comprador> consultarCompradores() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }

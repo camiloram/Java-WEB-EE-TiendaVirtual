@@ -20,7 +20,7 @@ import logica.AdministracionPersisitenciaJPALocal;
 public class CreacionOrdenInterceptor {
     
     @EJB
-    AdministracionPersisitenciaJPALocal administracionPersisitencia;
+    AdministracionPersisitenciaJPALocal administracionPersistencia;
     
     @AroundInvoke
     public Object creacionOrden(InvocationContext ic) throws Exception{
@@ -31,8 +31,8 @@ public class CreacionOrdenInterceptor {
         Bitacora bitacora = new Bitacora();
         bitacora.setPersona(administracionOrden.getComprador());
         bitacora.setFecha(new Date());
-        bitacora.setDescripcion("Creación de nueva orden");
-        
+        bitacora.setDescripcion("CreaciÃ³n de nueva orden");
+       
         administracionPersistencia.crearBitacora(bitacora);
         
         return ic.proceed();
