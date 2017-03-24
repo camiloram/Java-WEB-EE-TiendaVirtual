@@ -32,7 +32,7 @@ public class CreacionOrdenInterceptor {
         bitacora.setPersona(administracionOrden.getComprador());
         bitacora.setFecha(new Date());
         bitacora.setDescripcion("Creación de nueva orden");
-        
+       
         administracionPersistencia.crearBitacora(bitacora);
         
         return ic.proceed();

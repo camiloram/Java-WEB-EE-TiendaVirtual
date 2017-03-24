@@ -30,9 +30,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "findAllProducts", query = "SELECT p FROM Producto p"),
-    @NamedQuery(name = "findProductById", query = "SELECT p FROM Producto p WHERE p.id = :idProducto")
-    // name = "findAllProducts" Debe ser unico en el proyecto
+@NamedQuery(name="findAllProducts",query="SELECT p FROM Producto p"),
+@NamedQuery(name="findProductById",query=
+        "SELECT p FROM Producto p WHERE p.id = :idProducto"),
 })
 @EntityListeners(MonitoreoProducto.class)
 public class Producto implements Serializable {

@@ -6,7 +6,6 @@
 package excepciones;
 
 import javax.ejb.ApplicationException;
-
 /**
  *
  * @author Estudiante
