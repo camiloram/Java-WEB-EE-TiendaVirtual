@@ -40,4 +40,6 @@ public interface AdministracionPersisitenciaJPALocal {
     public List<Comprador> consultarCompradores();
 
     public Comprador consultarCompradores(String maria);
+    
+    public List consultarCarroCompras();
 }

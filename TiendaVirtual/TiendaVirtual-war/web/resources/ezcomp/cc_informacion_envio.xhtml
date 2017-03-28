@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="managedBean" rendered="true"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:panelGrid>
+            <h:outputLabel value="Pais"/>
+            <h:inputText id="pais" label="Pais" value="#{cc.attrs.managedBean.informacionEnvio.pais}"
+                         rendered="true" requiredMessage="Por favor digite el pais."/>
+            <h:outputLabel value="Departamento"/>
+            <h:message style="color:red" for="pais"/>
+            
+            <h:inputText id="departamento" label="Departamento" value="#{cc.attrs.managedBean.informacionEnvio.departamento}"
+                         rendered="true" requiredMessage="Por favor digite el departamento."/>
+            <h:message style="color:red" for="departamento"/>
+            
+            <h:outputLabel value="Ciudad"/>
+            <h:inputText id="ciudad" label="Ciudad" value="#{cc.attrs.managedBean.informacionEnvio.ciudad}"
+                         rendered="true" requiredMessage="Por favor digite la ciudad."/>
+            <h:message style="color:red" for="ciudad"/>
+            
+            <h:outputLabel value="Dirección"/>
+            <h:inputText id="direccion" label="Direccion" value="#{cc.attrs.managedBean.informacionEnvio.direccion}"
+                         rendered="true" requiredMessage="Por favor digite la dirección."/>
+            <h:message style="color:red" for="direccion"/>
+        </h:panelGrid>
+    </cc:implementation>
+</html>
