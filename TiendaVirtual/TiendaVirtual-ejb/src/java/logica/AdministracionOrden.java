@@ -42,7 +42,7 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     
     // Se Inyectaa la dependencia
     @EJB
-    AdministracionPersisitenciaJPALocal administracionPersistencia;
+    AdministracionPersistenciaJPALocal administracionPersistencia;
 
     // Se crea en el momento que es llamado este constructor
     public AdministracionOrden() {

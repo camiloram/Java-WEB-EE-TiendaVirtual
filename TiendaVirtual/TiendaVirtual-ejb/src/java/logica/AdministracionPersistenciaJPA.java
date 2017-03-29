@@ -11,24 +11,41 @@ import entidades.InformacionEnvio;
 import entidades.InformacionFactura;
 import entidades.Orden;
 import entidades.Producto;
+import excepciones.CreacionOrdenException;
+import excepciones.ModificacionProductoException;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
+import javax.ejb.Timeout;
+import javax.ejb.Timer;
+import javax.ejb.TimerService;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import notificaciones.NotificacionInterceptor;
 
 /**
  *
  * @author Estudiante
  */
 @Stateless
-public class AdministracionPersisitenciaJPA implements AdministracionPersisitenciaJPALocal {
+@TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+public class AdministracionPersistenciaJPA implements AdministracionPersistenciaJPALocal {
     
     // maneja la conexion a base de datos.
     // si esta no se define toma por defecto la que exista en caso que sea unica.
     @PersistenceContext
-    private EntityManager em;
-
+    EntityManager em;
+    
+    @Resource
+    private TimerService timerService;
+    
     @Override
     public Producto consultarProducto(int idProducto) {
         return em.find(Producto.class, idProducto); 
@@ -40,38 +57,50 @@ public class AdministracionPersisitenciaJPA implements AdministracionPersisitenc
     }
 
     @Override
-    public Integer crearOrden(Orden orden) {
-        em.persist(orden);
+    @Interceptors(NotificacionInterceptor.class)
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Integer crearOrden(Orden orden) throws CreacionOrdenException {
+        try {
+            em.persist(orden);
+            timerService.createTimer(15000, orden);
+        } catch (Exception ex) {
+           throw new CreacionOrdenException();
+        }
         return orden.getId();
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Integer crearInformacionEnvio(InformacionEnvio ie) {
         em.persist(ie);
+        em.flush();
         return ie.getId();
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Integer crearInformacionFactura(InformacionFactura infFac) {
         em.persist(infFac);
+        em.flush();
         return infFac.getId();
     }
 
     @Override
-    public void modificarProductos(List<Producto> productos, Orden orden) {
-        for (int i = 0; i < productos.size(); i++) {
-            Producto producto = productos.get(i);
-            producto.setOrden(orden);
-            em.merge(producto);
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void modificarProductos(List<Producto> productos, Orden orden) throws ModificacionProductoException {
+        try {    
+            for (Producto producto: productos) {
+                producto.setOrden(orden);
+                em.merge(producto);
+            }
+            //throw new ModificacionProductoException();//Se realiza la excepcion para probar rollback
+        } catch (Exception ex) {
+           throw new ModificacionProductoException();
         }
     }
-    
-    // em.remove(categoria);
-    // ademas para ser borrado debe ser administrado por el EM osea buscar y borrar
-    // o se podria usar em.remove(em.merge(categoria)); para convertirlo en administrado y borrar.
 
     @Override
-    public Comprador cosultarComprador(String login) {
+    public Comprador consultarComprador(String login) {
         return em.find(Comprador.class, login);
     }
 
@@ -83,6 +112,7 @@ public class AdministracionPersisitenciaJPA implements AdministracionPersisitenc
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Integer crearBitacora(Bitacora bitacora) {
         em.persist(bitacora);
         return bitacora.getId();
@@ -95,13 +125,10 @@ public class AdministracionPersisitenciaJPA implements AdministracionPersisitenc
         return compradores;
     }
 
-    @Override
-    public Comprador consultarCompradores(String maria) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List consultarCarroCompras() {
-        return null;
+    @Timeout
+    private void timerCrearOrden(Timer timer){
+        Orden orden = (Orden) timer.getInfo();
+        System.out.println("Se ha enviado la orden a la dirección "
+        + orden.getInformacionEnvio().getDireccion());
     }
 }

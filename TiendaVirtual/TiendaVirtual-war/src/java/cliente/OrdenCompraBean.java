@@ -18,9 +18,8 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
-import javax.faces.model.SelectItem;
 import logica.AdministracionOrdenLocal;
-import logica.AdministracionPersisitenciaJPALocal;
+import logica.AdministracionPersistenciaJPALocal;
 
 /**
  *
@@ -31,11 +30,13 @@ import logica.AdministracionPersisitenciaJPALocal;
 public class OrdenCompraBean implements Serializable {
 
     @EJB
-    AdministracionPersisitenciaJPALocal administracionPersisitencia;
+    AdministracionPersistenciaJPALocal administracionPersistencia;
+    
     @EJB
     AdministracionOrdenLocal administracionOrden;
     
     private InformacionEnvio informacionEnvio;
+    
     private InformacionFactura informacionFactura;
     
     /**
@@ -47,29 +48,30 @@ public class OrdenCompraBean implements Serializable {
     }
     
     public List<Comprador> getCompradores(){
-        return administracionPersisitencia.consultarCompradores();
+        return administracionPersistencia.consultarCompradores();
     }
     
     //public SelectItem[] getCompradores(){}
     
     public void compradoresListener(ValueChangeEvent vce){
         String login = vce.getNewValue().toString();
-        if (!login.equals("-1")) {
-            Comprador comprador = administracionPersisitencia.consultarCompradores(login);
+        if(!login.equals("-1")){
+            Comprador comprador = administracionPersistencia.consultarComprador(login);
             administracionOrden.adicionarComprador(comprador);
         }
     }
-    public List getProductos(){
-        return administracionPersisitencia.consultarProductos();
+    
+    public List getProductos() {
+        return administracionPersistencia.consultarProductos();
     }
     
     public void adicionarProducto(String id){
-        Producto producto = administracionPersisitencia.consultarProducto(Integer.parseInt(id));
+        Producto producto = administracionPersistencia.consultarProducto(Integer.parseInt(id));
         administracionOrden.adicionarProducto(producto);
     }
     
     public List getCarroCompras(){
-        return administracionPersisitencia.consultarCarroCompras();
+       return administracionOrden.consultarCarroCompras();
     }
     
     public String adicionarInformacionEnvio(){
@@ -77,14 +79,14 @@ public class OrdenCompraBean implements Serializable {
         return "informacion_factura";
     }
     
-    public void crearOrdenCompra() {
+    public void crearOrdenCompra(){
         administracionOrden.adicionarInformacionFactura(informacionFactura);
-        try {
+        try{
             administracionOrden.crearOrdenCompra();
         } catch (CreacionOrdenException ex) {
-            System.out.println("Error en la creación de la orden.");
+            System.out.println("Error en creación de orden");
         } catch (ModificacionProductoException ex) {
-            System.out.println("Error en la modificación de productos.");
+            System.out.println("Error en modificación de productos");
         }
         
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("OrdenCompraBean");
@@ -98,12 +100,12 @@ public class OrdenCompraBean implements Serializable {
         this.informacionFactura = informacionFactura;
     }
 
-    public AdministracionPersisitenciaJPALocal getAdministracionPersisitencia() {
-        return administracionPersisitencia;
+    public AdministracionPersistenciaJPALocal getAdministracionPersisitencia() {
+        return administracionPersistencia;
     }
 
-    public void setAdministracionPersisitencia(AdministracionPersisitenciaJPALocal administracionPersisitencia) {
-        this.administracionPersisitencia = administracionPersisitencia;
+    public void setAdministracionPersisitencia(AdministracionPersistenciaJPALocal administracionPersisitencia) {
+        this.administracionPersistencia = administracionPersisitencia;
     }
 
     public AdministracionOrdenLocal getAdministracionOrden() {

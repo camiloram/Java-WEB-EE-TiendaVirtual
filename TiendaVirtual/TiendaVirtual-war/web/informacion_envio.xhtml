@@ -8,7 +8,7 @@
     <body>
 
         <ui:composition template="./template.xhtml">
-        <ui:param name="titulo" value="Información Envio"/>
+        <ui:param name="titulo" value="Información Envío"/>
             <ui:define name="top"><!--top--></ui:define>
             <ui:define name="left"><!--left--></ui:define>
             <ui:define name="right"><!--right--></ui:define>
@@ -17,8 +17,8 @@
                 <h:form>
                     <ezcomp:cc_informacion_envio managedBean="#{ordenCompraBean}"/>
                     <h:panelGrid columns="2">
-                        <h:commandButton value="Anterior" action="catalogo" immediate=""/>
-                        <h:commandButton value="Siguiente" action="#{ordenCompraBean.adicionarInformacionEnvio}"/>
+                        <h:commandButton value="Anterior" action="catalogo" immediate="true"/>
+                        <h:commandButton value="Siguiente" action="#{ordenCompraBean.adicionarInformacionEnvio()}"/>
                     </h:panelGrid>
                 </h:form>
             </ui:define>

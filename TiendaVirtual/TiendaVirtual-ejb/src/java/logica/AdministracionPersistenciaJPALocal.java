@@ -11,6 +11,8 @@ import entidades.InformacionEnvio;
 import entidades.InformacionFactura;
 import entidades.Orden;
 import entidades.Producto;
+import excepciones.CreacionOrdenException;
+import excepciones.ModificacionProductoException;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -19,27 +21,23 @@ import javax.ejb.Local;
  * @author Estudiante
  */
 @Local
-public interface AdministracionPersisitenciaJPALocal {
+public interface AdministracionPersistenciaJPALocal {
     
     public Producto consultarProducto(int idProducto);
     
-    public Integer crearOrden(Orden orden);
+    public Integer crearOrden(Orden orden) throws CreacionOrdenException;
     
     public Integer crearInformacionEnvio(InformacionEnvio ie);
     
     public Integer crearInformacionFactura(InformacionFactura infFac);
     
-    public void modificarProductos(List<Producto> productos, Orden orden);
+    public void modificarProductos(List<Producto> productos, Orden orden) throws ModificacionProductoException;
     
-    public Comprador cosultarComprador(String login);
+    public Comprador consultarComprador(String login);
     
     public List<Producto> consultarProductos();
     
     public Integer crearBitacora(Bitacora bitacora);
     
     public List<Comprador> consultarCompradores();
-
-    public Comprador consultarCompradores(String maria);
-    
-    public List consultarCarroCompras();
 }
