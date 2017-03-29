@@ -99,4 +99,9 @@ public class AdministracionPersisitenciaJPA implements AdministracionPersisitenc
     public Comprador consultarCompradores(String maria) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List consultarCarroCompras() {
+        return null;
+    }
 }
