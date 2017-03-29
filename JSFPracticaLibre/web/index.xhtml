@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    
+    <h:body>
+        <H1>Administración Persona</H1>
+
+        <h:form>
+            <h:panelGrid styleClass="createTable" columns="3" cellpadding="4" cellspacing="0">
+
+                <p:outputLabel for="name">Nombre:</p:outputLabel>
+                <p:inputText id="name" 
+                             value="#{administracionPersonaBean.persona.nombre}" 
+                             required="true" 
+                             requiredMessage="Nombre is required"/>
+                <p:message for="name" style="color:red"/>
+
+                <p:outputLabel for="edad">Edad:</p:outputLabel>
+                <p:inputText id="edad" 
+                             value="#{administracionPersonaBean.persona.edad}" 
+                             required="true" 
+                             requiredMessage="Edad is required"/>
+                <p:message for="edad" style="color:red"/>
+
+                <p:outputLabel for="sexo">Sexo:</p:outputLabel>
+                <p:selectOneMenu id="sexo" value="#{administracionPersonaBean.persona.sexo}" 
+                             required="true" 
+                             requiredMessage="Edad is required">
+                    <f:selectItem itemLabel=" -- Seleccione --" itemValue="" />
+                    <f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+                    <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                </p:selectOneMenu>
+                <p:message for="sexo" style="color:red"/>
+
+                <p:outputLabel for="fechaNacimiento">Fecha Nacimiento:</p:outputLabel>
+                <p:inputText id="fechaNacimiento" 
+                             value="#{administracionPersonaBean.persona.fechaNacimiento}" 
+                             required="true" 
+                             requiredMessage="Fecha Nacimiento is required" />
+                <p:message for="fechaNacimiento" style="color:red"/>
+
+                <p:commandButton action="#{administracionPersonaBean.crearPersona()}" value="Create Persona" />
+            </h:panelGrid>
+
+            <p:dataTable var="persona" value="#{administracionPersonaBean.personaList}">
+                <f:facet name="header">
+                    Listado de Personas
+                </f:facet>
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{persona.nombre}" />
+                </p:column>
+                <p:column headerText="Edad">
+                    <h:outputText value="#{persona.edad}" />
+                </p:column>
+                <p:column headerText="Sexo">
+                    <h:outputText value="#{persona.sexo}" />
+                </p:column>
+                <p:column headerText="fechaNacimiento">
+                    <h:outputText value="#{persona.fechaNacimiento.time}" />
+                </p:column>
+                <!--
+                <p:column style="width:24px">
+                    <p:commandLink update=":form:documentPanel" oncomplete="PF('documentDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search">
+                        <f:setPropertyActionListener value="#{document}" target="#{ttBasicView.selectedDocument}" />
+                    </p:commandLink>
+                </p:column>
+                -->
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
