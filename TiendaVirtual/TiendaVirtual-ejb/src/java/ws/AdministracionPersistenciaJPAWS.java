@@ -11,27 +11,26 @@ import entidades.InformacionEnvio;
 import entidades.InformacionFactura;
 import entidades.Orden;
 import entidades.Producto;
+import excepciones.CreacionOrdenException;
+import excepciones.ModificacionProductoException;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.jws.WebService;
 import javax.ejb.Stateless;
-import javax.jws.Oneway;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import javax.xml.ws.RequestWrapper;
-import javax.xml.ws.ResponseWrapper;
-import logica.AdministracionPersisitenciaJPALocal;
+import javax.jws.WebService;
+import logica.AdministracionPersistenciaJPALocal;
 
 /**
  *
  * @author Estudiante
  */
-@WebService(serviceName = "AdministracioPersistemciaJPAWS")
-@Stateless()
-public class AdministracioPersistemciaJPAWS {
+@WebService(serviceName = "AdministracionPersistenciaJPAWS")
+@Stateless
+public class AdministracionPersistenciaJPAWS {
 
     @EJB
-    private AdministracionPersisitenciaJPALocal ejbRef;// Add business logic below. (Right-click in editor and choose
+    private AdministracionPersistenciaJPALocal ejbRef;// Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Web Service Operation")
 
     @WebMethod(operationName = "consultarProducto")
@@ -40,7 +39,7 @@ public class AdministracioPersistemciaJPAWS {
     }
 
     @WebMethod(operationName = "crearOrden")
-    public Integer crearOrden(@WebParam(name = "orden") Orden orden) {
+    public Integer crearOrden(@WebParam(name = "orden") Orden orden) throws CreacionOrdenException {
         return ejbRef.crearOrden(orden);
     }
 
@@ -55,14 +54,13 @@ public class AdministracioPersistemciaJPAWS {
     }
 
     @WebMethod(operationName = "modificarProductos")
-    @Oneway
-    public void modificarProductos(@WebParam(name = "productos") List<Producto> productos, @WebParam(name = "orden") Orden orden) {
+    public void modificarProductos(@WebParam(name = "productos") List<Producto> productos, @WebParam(name = "orden") Orden orden) throws ModificacionProductoException {
         ejbRef.modificarProductos(productos, orden);
     }
 
-    @WebMethod(operationName = "cosultarComprador")
-    public Comprador cosultarComprador(@WebParam(name = "login") String login) {
-        return ejbRef.cosultarComprador(login);
+    @WebMethod(operationName = "consultarComprador")
+    public Comprador consultarComprador(@WebParam(name = "login") String login) {
+        return ejbRef.consultarComprador(login);
     }
 
     @WebMethod(operationName = "consultarProductos")
@@ -78,13 +76,6 @@ public class AdministracioPersistemciaJPAWS {
     @WebMethod(operationName = "consultarCompradores")
     public List<Comprador> consultarCompradores() {
         return ejbRef.consultarCompradores();
-    }
-
-    @WebMethod(operationName = "consultarCompradores_1")
-    @RequestWrapper(className = "consultarCompradores_1")
-    @ResponseWrapper(className = "consultarCompradores_1Response")
-    public Comprador consultarCompradores(@WebParam(name = "maria") String maria) {
-        return ejbRef.consultarCompradores(maria);
     }
     
 }

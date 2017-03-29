@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.AdministracionOrdenLocal;
-import logica.AdministracionPersisitenciaJPALocal;
+import logica.AdministracionPersistenciaJPALocal;
 import logica.AdministracionPersistenciaLocal;
 
 /**

@@ -6,7 +6,7 @@
 
     <!-- INTERFACE -->
     <cc:interface>
-        <cc:attribute name="managedBean" rendered="true"/>
+        <cc:attribute name="managedBean" required="true"/>
     </cc:interface>
 
     <!-- IMPLEMENTATION -->
@@ -14,22 +14,22 @@
         <h:panelGrid>
             <h:outputLabel value="Pais"/>
             <h:inputText id="pais" label="Pais" value="#{cc.attrs.managedBean.informacionEnvio.pais}"
-                         rendered="true" requiredMessage="Por favor digite el pais."/>
-            <h:outputLabel value="Departamento"/>
+                         required="true" requiredMessage="Por favor digite el pais."/>
             <h:message style="color:red" for="pais"/>
             
+            <h:outputLabel value="Departamento"/>
             <h:inputText id="departamento" label="Departamento" value="#{cc.attrs.managedBean.informacionEnvio.departamento}"
-                         rendered="true" requiredMessage="Por favor digite el departamento."/>
+                         required="true" requiredMessage="Por favor digite el departamento."/>
             <h:message style="color:red" for="departamento"/>
             
             <h:outputLabel value="Ciudad"/>
             <h:inputText id="ciudad" label="Ciudad" value="#{cc.attrs.managedBean.informacionEnvio.ciudad}"
-                         rendered="true" requiredMessage="Por favor digite la ciudad."/>
+                         required="true" requiredMessage="Por favor digite la ciudad."/>
             <h:message style="color:red" for="ciudad"/>
             
             <h:outputLabel value="Dirección"/>
             <h:inputText id="direccion" label="Direccion" value="#{cc.attrs.managedBean.informacionEnvio.direccion}"
-                         rendered="true" requiredMessage="Por favor digite la dirección."/>
+                         required="true" requiredMessage="Por favor digite la dirección."/>
             <h:message style="color:red" for="direccion"/>
         </h:panelGrid>
     </cc:implementation>

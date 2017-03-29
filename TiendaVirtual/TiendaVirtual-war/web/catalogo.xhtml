@@ -13,70 +13,71 @@
             <ui:define name="right"><!--right--></ui:define>
             <ui:define name="content"><!--content--></ui:define>
             <ui:define name="body">
-                <h:form id="adicionProductos">
-                    <h:outputLabel value="Comprador"/>
-
+                <h:form id="adicionarProductos">
+                    <h:outputLabel value="Comprador" />
                     <h:selectOneMenu valueChangeListener="#{ordenCompraBean.compradoresListener}">
-                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione una opción"/>
-                        <f:selectItems value="#{ordenCompraBean.compradores}" var="comprador" 
-                                       itemValue="#{comprador.login}" 
-                                       itemLabel="#{comprador.nombre1.concat(' ').concat(comprador.nombre2).concat(' ').
-                                                    concat(comprador.apellido1).concat(' ').concat(comprador.apellido2)}"/>
+                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione una opción" />
+                        <f:selectItems value="#{ordenCompraBean.compradores}" var="comprador"
+                                itemValue="#{comprador.login}"
+                                itemLabel="#{comprador.nombre1.concat(' ').concat(comprador.nombre2).
+                                        concat(' ').concat(comprador.apellido1).concat(' ').
+                                        concat(comprador.apellido2)}"/>
                     </h:selectOneMenu>
 
                     <h:panelGrid>
                         <f:facet name="header">
-                            <h:outputText value="Productos"></h:outputText>
+                            <h:outputText value="Productos" />
                         </f:facet>
-                    </h:panelGrid>
                     
-                    <h:dataTable id="tblProductos" value="#{ordenCompraBean.productos}" border="1" width="70%" var="producto">
-                        <!-- ordenCompraBean.productos - no requiere llamado al get por que lo hace implicito -->
-                        <h:column>
-                            <h:commandLink value="Adicionar #{producto.id}" action="#{ordenCompraBean.adicionarProducto(producto.id)}">
-                                <f:ajax event="action" render=":adicionProductos:tblCarroCompras"/>
-                            </h:commandLink>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="NOMBRE"></h:outputText>
-                            </f:facet>
-                            <h:outputText value="#{producto.nombre}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="PRECIO"></h:outputText>
-                            </f:facet>
-                            <h:outputText value="#{producto.precio}">
-                                <f:convertNumber pattern="$####"/>
-                            </h:outputText>
-                        </h:column>
+                        <h:dataTable id="tblProductos" value="#{ordenCompraBean.productos}" border="1" width="700" var="producto">
+                            <!-- ordenCompraBean.productos - no requiere llamado al get por que lo hace implicito -->
+                            <h:column>
+                                <h:commandLink value="Adicionar"
+                                               action="#{ordenCompraBean.adicionarProducto(producto.id)}">
+                                    <f:ajax event="action" render=":adicionarProductos:tblCarroCompras"/>
+                                </h:commandLink>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="NOMBRE" />
+                                </f:facet>
+                                <h:outputText value="#{producto.nombre}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="PRECIO" />
+                                </f:facet>
+                                <h:outputText value="#{producto.precio}">
+                                    <f:convertNumber pattern="$####"/>
+                                </h:outputText>
+                            </h:column>
 
-                    </h:dataTable>
+                        </h:dataTable>
+                    </h:panelGrid>
                     <h:panelGrid>
                         <f:facet name="header">
-                            <h:outputText value="Carro de compras"></h:outputText>
+                            <h:outputText value="Carro de compras"/>
                         </f:facet>
 
-                        <h:dataTable id="tblCarroCompras" value="#{ordenCompraBean.carroCompras}" border="1" width="70%" var="producto">
+                        <h:dataTable id="tblCarroCompras" value="#{ordenCompraBean.carroCompras}" border="1" width="700" var="producto">
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="ID"></h:outputText>
+                                    <h:outputText value="ID" />
                                 </f:facet>
                                 <h:outputText value="#{producto.id}"/>
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="NOMBRE"></h:outputText>
+                                    <h:outputText value="NOMBRE" />
                                 </f:facet>
                                 <h:outputText value="#{producto.nombre}"/>
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="PRECIO"></h:outputText>
+                                    <h:outputText value="PRECIO" />
                                 </f:facet>
                                 <h:outputText value="#{producto.precio}">
                                     <f:convertNumber pattern="$####"/>

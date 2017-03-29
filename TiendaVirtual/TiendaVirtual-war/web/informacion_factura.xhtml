@@ -17,31 +17,35 @@
                 <h:form>
                     <h:panelGrid>
                         <h:outputLabel value="Código Tarjeta"/>
-                        <h:inputText id="codTarjeta" label="Código Tarjeta" value="#{ordenCompraBean.informacionFactura.codTarjeta}" 
+                        <h:inputText id="codTarjeta" label="Código Tarjeta" maxlength="4" value="#{ordenCompraBean.informacionFactura.codigoTarjeta}" required="true"
                                      requiredMessage="Por favor digite el código de la tarjeta."
-                                     converterMessage="El campo código de la tarjeta debe ser numérico"/>
-                        <f:validateRequired/>
-                        <f:convertNumber/>
-                        <f:validator validatorId="numeroPositivoValidator"/>
+                                     converterMessage="El campo código de la tarjeta debe ser numérico">
+                            <f:validateRequired/>
+                            <f:convertNumber/>
+                            <f:validator validatorId="numeroPositivoValidator"/>
+                        </h:inputText>
+                        
                         
                         <h:outputLabel value="Número cuenta"/>
-                        <h:inputText id="numeroCuenta" label="Número cuenta" value="#{ordenCompraBean.informacionFactura.numeroCuenta}" 
+                        <h:inputText id="numeroCuenta" label="Número cuenta" value="#{ordenCompraBean.informacionFactura.numeroTarjeta}" required="true"
                                      requiredMessage="Por favor digite el número de cuenta."
-                                     converterMessage="El campo número de cuenta debe ser numérico"/>
-                        <f:validateRequired/>
-                        <f:convertNumber/>
+                                     converterMessage="El campo número de cuenta debe ser numérico">
+                            <f:validateRequired/>
+                            <f:convertNumber/>
+                            <f:validator validatorId="numeroPositivoValidator"/>
+                        </h:inputText>
                         
                         <h:outputLabel value="Fecha Expiración"/>
-                        <h:inputText id="fechaExpiracion" label="Fecha Expiración" value="#{ordenCompraBean.informacionFactura.fechaExpiracion}" 
+                        <h:inputText id="fechaExpiracion" label="Fecha Expiración" value="#{ordenCompraBean.informacionFactura.fechaExpiracion}" required="true"
                                      requiredMessage="Por favor digite la fecha de expiración"
-                                     converterMessage="El campo fecha de expiración debe tener el siguiente formato dd/MM/yyyy"/>
-                        <f:validateRequired/>
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        
+                                     converterMessage="El campo fecha de expiración debe tener el siguiente formato dd/MM/yyyy">
+                            <f:validateRequired/>
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:inputText>
                     </h:panelGrid>
                     
                     <h:panelGrid columns="2">
-                        <h:commandButton value="Anterior" action="informacion_envio" immediate=""/>
+                        <h:commandButton value="Anterior" action="informacion_envio" immediate="true"/>
                         <h:commandButton value="Finalizar compra" action="#{ordenCompraBean.crearOrdenCompra()}"/>
                     </h:panelGrid>
                     

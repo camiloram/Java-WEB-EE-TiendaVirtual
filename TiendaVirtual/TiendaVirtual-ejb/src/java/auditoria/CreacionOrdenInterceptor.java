@@ -11,7 +11,7 @@ import javax.ejb.EJB;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 import logica.AdministracionOrdenLocal;
-import logica.AdministracionPersisitenciaJPALocal;
+import logica.AdministracionPersistenciaJPALocal;
 
 /**
  *
@@ -20,7 +20,7 @@ import logica.AdministracionPersisitenciaJPALocal;
 public class CreacionOrdenInterceptor {
     
     @EJB
-    AdministracionPersisitenciaJPALocal administracionPersistencia;
+    AdministracionPersistenciaJPALocal administracionPersistencia;
     
     @AroundInvoke
     public Object creacionOrden(InvocationContext ic) throws Exception{
