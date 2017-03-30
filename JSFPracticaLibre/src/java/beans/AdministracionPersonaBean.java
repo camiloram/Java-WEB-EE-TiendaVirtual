@@ -6,54 +6,74 @@
 package beans;
 
 import entidades.Persona;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-// paso 3 //
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
- * @author Estudiante
+ * @author Andres
  */
-@Named(value = "administracionPersonaBean")
+@ManagedBean
 @SessionScoped
-public class AdministracionPersonaBean implements Serializable {
+public class AdministracionPersonaBean {
 
-    // paso 4 //
-    
-    List<Persona> personaList = new ArrayList<Persona>();
-    Persona persona = new Persona();
-     
+    private Persona persona = new Persona();
+    private Persona personaBorrar = new Persona();
+    private List<Persona> personas = new ArrayList<Persona>();
     
     /**
      * Creates a new instance of AdministracionPersonaBean
      */
     public AdministracionPersonaBean() {
-        persona.setNombre("Camilo");
-        persona.setSexo("Masculino");
-        persona.setEdad("30");
-        persona.setFechaNacimiento(new Date());
-        
-        personaList.add(persona);
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public List<Persona> getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(List<Persona> personas) {
+        this.personas = personas;
+    }
+
+    public Persona getPersonaBorrar() {
+        return personaBorrar;
+    }
+
+    public void setPersonaBorrar(Persona personaBorrar) {
+        this.personaBorrar = personaBorrar;
     }
     
-        public List<Persona> getPersonaList() {
-		return personaList;
-	}
-
-	public void setPersonaList(List<Persona> personaList) {
-		this.personaList = personaList;
-	}
-
-	public Persona getPersona() {
-		return persona;
-	}
-
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}    
+    public void agregarPersona(){
+        persona.setId(personas.size() + 1);
+        personas.add(persona);
+        persona = new Persona();
+    }
+    
+    public void eliminarPersona(Persona persona){
+        personas.remove(persona);
+    }
+    
+    public void onRowEdit(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Persona editada correctamente", ((Persona) event.getObject()).getId().toString());
+        FacesContext.getCurrentInstance().addMessage("mensaje", msg);
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edición cancelada", ((Persona) event.getObject()).getId().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
 }

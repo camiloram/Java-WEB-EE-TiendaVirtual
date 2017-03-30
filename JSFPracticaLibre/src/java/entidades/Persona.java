@@ -6,23 +6,18 @@
 package entidades;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
- * @author Estudiante
+ * @author Andres
  */
-
-// paso 1 //
-
 public class Persona {
-    
-    // paso 2 //
-    
     private Integer id;
     private String nombre;
     private String edad;
     private String sexo;
-    private Date fechaNacimiento;    
+    private Date fechaNacimiento;
 
     public Integer getId() {
         return id;
@@ -31,7 +26,7 @@ public class Persona {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    
     public String getNombre() {
         return nombre;
     }
@@ -63,6 +58,20 @@ public class Persona {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Persona other = (Persona) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
     
 }
