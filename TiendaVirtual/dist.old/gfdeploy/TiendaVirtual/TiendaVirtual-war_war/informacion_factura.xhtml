@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+        <ui:param name="titulo" value="Información Factura"/>
+            <ui:define name="top"><!--top--></ui:define>
+            <ui:define name="left"><!--left--></ui:define>
+            <ui:define name="right"><!--right--></ui:define>
+            <ui:define name="content"><!--content--></ui:define>
+            <ui:define name="body">
+                <h:form>
+                    <h:panelGrid>
+                        <h:outputLabel value="Código Tarjeta"/>
+                        <h:inputText id="codTarjeta" label="Código Tarjeta" maxlength="4" value="#{ordenCompraBean.informacionFactura.codigoTarjeta}" required="true"
+                                     requiredMessage="Por favor digite el código de la tarjeta."
+                                     converterMessage="El campo código de la tarjeta debe ser numérico">
+                            <f:validateRequired/>
+                            <f:convertNumber/>
+                            <f:validator validatorId="numeroPositivoValidator"/>
+                        </h:inputText>
+                        
+                        
+                        <h:outputLabel value="Número cuenta"/>
+                        <h:inputText id="numeroCuenta" label="Número cuenta" value="#{ordenCompraBean.informacionFactura.numeroTarjeta}" required="true"
+                                     requiredMessage="Por favor digite el número de cuenta."
+                                     converterMessage="El campo número de cuenta debe ser numérico">
+                            <f:validateRequired/>
+                            <f:convertNumber/>
+                            <f:validator validatorId="numeroPositivoValidator"/>
+                        </h:inputText>
+                        
+                        <h:outputLabel value="Fecha Expiración"/>
+                        <h:inputText id="fechaExpiracion" label="Fecha Expiración" value="#{ordenCompraBean.informacionFactura.fechaExpiracion}" required="true"
+                                     requiredMessage="Por favor digite la fecha de expiración"
+                                     converterMessage="El campo fecha de expiración debe tener el siguiente formato dd/MM/yyyy">
+                            <f:validateRequired/>
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:inputText>
+                    </h:panelGrid>
+                    
+                    <h:panelGrid columns="2">
+                        <h:commandButton value="Anterior" action="informacion_envio" immediate="true"/>
+                        <h:commandButton value="Finalizar compra" action="#{ordenCompraBean.crearOrdenCompra()}"/>
+                    </h:panelGrid>
+                    
+                </h:form>
+            </ui:define>
+            <ui:define name="bottom"><!--bottom--></ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+        <ui:param name="titulo" value="Información Envío"/>
+            <ui:define name="top"><!--top--></ui:define>
+            <ui:define name="left"><!--left--></ui:define>
+            <ui:define name="right"><!--right--></ui:define>
+            <ui:define name="content"><!--content--></ui:define>
+            <ui:define name="body">
+                <h:form>
+                    <ezcomp:cc_informacion_envio managedBean="#{ordenCompraBean}"/>
+                    <h:panelGrid columns="2">
+                        <h:commandButton value="Anterior" action="catalogo" immediate="true"/>
+                        <h:commandButton value="Siguiente" action="#{ordenCompraBean.adicionarInformacionEnvio()}"/>
+                    </h:panelGrid>
+                </h:form>
+            </ui:define>
+            <ui:define name="bottom"><!--bottom--></ui:define>
+        </ui:composition>
+
+    </body>
+</html>

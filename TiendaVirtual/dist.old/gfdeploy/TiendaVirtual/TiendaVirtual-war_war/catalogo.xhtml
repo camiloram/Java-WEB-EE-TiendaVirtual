@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./template.xhtml">
+            <ui:param name="titulo" value="Adición de productos"/>
+            <ui:define name="top"><!--top--></ui:define>
+            <ui:define name="left"><!--left--></ui:define>
+            <ui:define name="right"><!--right--></ui:define>
+            <ui:define name="content"><!--content--></ui:define>
+            <ui:define name="body">
+                <h:form id="adicionarProductos">
+                    <h:outputLabel value="Comprador" />
+                    <h:selectOneMenu valueChangeListener="#{ordenCompraBean.compradoresListener}">
+                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione una opción" />
+                        <f:selectItems value="#{ordenCompraBean.compradores}" var="comprador"
+                                itemValue="#{comprador.login}"
+                                itemLabel="#{comprador.nombre1.concat(' ').concat(comprador.nombre2).
+                                        concat(' ').concat(comprador.apellido1).concat(' ').
+                                        concat(comprador.apellido2)}"/>
+                    </h:selectOneMenu>
+
+                    <h:panelGrid>
+                        <f:facet name="header">
+                            <h:outputText value="Productos" />
+                        </f:facet>
+                    
+                        <h:dataTable id="tblProductos" value="#{ordenCompraBean.productos}" border="1" width="700" var="producto">
+                            <!-- ordenCompraBean.productos - no requiere llamado al get por que lo hace implicito -->
+                            <h:column>
+                                <h:commandLink value="Adicionar"
+                                               action="#{ordenCompraBean.adicionarProducto(producto.id)}">
+                                    <f:ajax event="action" render=":adicionarProductos:tblCarroCompras"/>
+                                </h:commandLink>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="NOMBRE" />
+                                </f:facet>
+                                <h:outputText value="#{producto.nombre}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="PRECIO" />
+                                </f:facet>
+                                <h:outputText value="#{producto.precio}">
+                                    <f:convertNumber pattern="$####"/>
+                                </h:outputText>
+                            </h:column>
+
+                        </h:dataTable>
+                    </h:panelGrid>
+                    <h:panelGrid>
+                        <f:facet name="header">
+                            <h:outputText value="Carro de compras"/>
+                        </f:facet>
+
+                        <h:dataTable id="tblCarroCompras" value="#{ordenCompraBean.carroCompras}" border="1" width="700" var="producto">
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ID" />
+                                </f:facet>
+                                <h:outputText value="#{producto.id}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="NOMBRE" />
+                                </f:facet>
+                                <h:outputText value="#{producto.nombre}"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="PRECIO" />
+                                </f:facet>
+                                <h:outputText value="#{producto.precio}">
+                                    <f:convertNumber pattern="$####"/>
+                                </h:outputText>
+                            </h:column>
+
+                        </h:dataTable>
+                    </h:panelGrid>
+
+                    <h:commandButton value="Siguiente" action="informacion_envio"/>
+                </h:form>
+            </ui:define>
+            <ui:define name="bottom"><!--bottom--></ui:define>
+        </ui:composition>
+    </body>
+</html>
